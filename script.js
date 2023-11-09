@@ -89,7 +89,7 @@ document.getElementById('btnOver').addEventListener('click', function () {
         if (minValue === maxValue) {
             const phraseRandom = Math.round(Math.random());
             const answerPhrase = phraseRandom === 1
-                ? 'Вы ьли неправильное число!\n🤔'
+                ? 'Вы загадали неправильное число!\n🤔'
                 : 'Я сдаюсь..\n🤷‍♀️';
 
             answerField.innerText = answerPhrase;
