@@ -19,20 +19,20 @@
                         <input type="number" id="maxValueInput" class="form-control" value="100" />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="toggleFormAndGame()" id="startGameButton">
+                        <button type="button" class="btn btn-primary" id="startGameButton">
                             Начать игру
                         </button>
                     </div>
                 </form>
-                <div id="notification">Загадайте любое целое число от <span id="minValueSpan"></span> до <span id="maxValueSpan"></span>, а я его угадаю</div>
+                <div id="notification">Загадайте любое целое число в диапазоне: <span id="minValueSpan"></span> - <span id="maxValueSpan"></span>, а я его угадаю</div>
                 <div class="card" id="game">
                     <div class="card-header">
-                        <p class="m-0">Вопрос №<span id="orderNumberField">5</span></p>
+                        <p class="m-0">Вопрос №<span id="orderNumberField"></span></p>
                     </div>
                     <div class="card-body">
                         <div class="row no-gutters">
                             <div class="col">
-                                <h3 class="card-title m-0"><span id="answerField">Вы загадали число 5?</span></h3>
+                                <h3 class="card-title m-0"><span id="answerField"></span></h3>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-link" onclick="toggleFormAndGame()" id="btnRetry">Заново</button>
+                        <button class="btn btn-link" id="btnRetry">Заново</button>
                     </div>
                 </div>
             </div>

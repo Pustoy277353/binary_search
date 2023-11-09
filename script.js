@@ -34,41 +34,45 @@ let orderNumberField, answerField, gameResult;
 let orderNumber = 1;
 let gameRun = false;
 
-let isFormVisible = true;
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("frm");
+    const notification = document.getElementById("notification");
+    const game = document.getElementById("game");
+    const startGameButton = document.getElementById("startGameButton");
 
-function toggleFormAndGame() {
-    const formElement = document.getElementById("frm");
-    const gameElement = document.getElementById("game");
+    startGameButton.addEventListener("click", function () {
+        form.style.display = "none";
+        notification.style.display = "block";
+        game.style.display = "block"
+    });
 
-    if (formElement.style.display === "block") {
-        formElement.style.display = "none";
-        gameElement.style.display = "block";
-    } else {
-        formElement.style.display = "block";
-        gameElement.style.display = "none";
-    }
-}
+    btnRetry.addEventListener('click', function () {
+        form.style.display = "block";
+        notification.style.display = "none";
+        game.style.display = "none"
+    });
+});
+
+
 
 document.getElementById('startGameButton').addEventListener('click', function () {
     if (!gameRun) {
         minValue = parseInt(document.getElementById('minValueInput').value);
         maxValue = parseInt(document.getElementById('maxValueInput').value);
 
-        minValue = (minValue > 999) ? 999 : (minValue < -999) ? -999 : minValue;
-        maxValue = (maxValue > 999) ? 999 : (maxValue < -999) ? -999 : maxValue;
+        minValue = (minValue > 0) ? 0 : (minValue < -999) ? -999 : minValue;
+        maxValue = (maxValue > 999) ? 999 : (maxValue < -0) ? 100 : maxValue;
         orderNumberField = document.getElementById('orderNumberField');
         answerField = document.getElementById('answerField');
 
         orderNumberField.innerText = 1;
         answerField.innerText = `Вы загадали число ${numberToText(Math.floor((minValue + maxValue) / 2))}?`;
 
-        const notification = document.getElementById('notification');
         const minValueSpan = document.getElementById('minValueSpan');
         const maxValueSpan = document.getElementById('maxValueSpan');
-        
-        notification.style.display = 'block';
-        minValueSpan.innerText = minValue;
-        maxValueSpan.innerText = maxValue;
+
+        minValueSpan.innerText = numberToText(minValue);
+        maxValueSpan.innerText = numberToText(maxValue);
 
         orderNumber = 1;
         gameRun = true;
@@ -85,7 +89,7 @@ document.getElementById('btnOver').addEventListener('click', function () {
         if (minValue === maxValue) {
             const phraseRandom = Math.round(Math.random());
             const answerPhrase = phraseRandom === 1
-                ? 'Вы загадали неправильное число!\n🤔'
+                ? 'Вы ьли неправильное число!\n🤔'
                 : 'Я сдаюсь..\n🤷‍♀️';
 
             answerField.innerText = answerPhrase;
@@ -111,7 +115,7 @@ document.getElementById('btnLess').addEventListener('click', function () {
             answerField.innerText = answerPhrase;
             gameRun = false;
         } else {
-            maxValue = Math.floor((minValue + maxValue) / 2) - 1;
+            maxValue = Math.floor((minValue + maxValue-1) / 2);
             orderNumber++;
             orderNumberField.innerText = orderNumber;
             const randomPhrase = responsePhrases[Math.floor(Math.random() * responsePhrases.length)];
@@ -146,7 +150,6 @@ document.getElementById('btnRetry').addEventListener('click', function () {
     maxValue = undefined;
     orderNumber = 1;
     gameRun = false;
-    notification.style.display = 'none';
 
     orderNumberField.innerText = '';
     answerField.innerText = '';
